@@ -1,4 +1,19 @@
-﻿<!DOCTYPE html>
+﻿<?php require_once('security/DB.php'); ?>
+<?php
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    //If the session user variable is blank redirect to the login screen. Otherwise grab sorted contacts from the database.
+    if($_SESSION['user']==""){
+        header("location:login.php");
+    }else{
+        $sql="SELECT * FROM Tickets WHERE order Owner=".$_SESSION['user']." by Priority Desc";
+        $result=mysql_query($sql);
+    }
+
+
+?>
+<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -9,7 +24,7 @@
     <body>
         <div class="navHeader">
             <div class="innerNavHeader">
-                <a class="navHeaderLink left">All Tickets</a><a class="navHeaderLink left current">New Ticket</a><a class="contactButton right" onclick="">Log Out</a>
+                <a href="search.php"class="navHeaderLink left">All Tickets</a><a class="navHeaderLink left current">New Ticket</a><a href="security/logout.php" class="contactButton right" onclick="">Log Out</a>
             </div>
         </div>
 

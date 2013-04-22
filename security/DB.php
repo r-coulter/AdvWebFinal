@@ -3,7 +3,7 @@
     $username="db200168042"; // Mysql username 
     $password="98292"; // Mysql password 
     $db_name="db200168042"; // Database name 
-    $usr_name="admin"; // Table name 
+    $usr_tbl_name="admin"; // Table name 
     $tkt_name="Tickets"; // Table name
 
     // Connect to server and select databse.

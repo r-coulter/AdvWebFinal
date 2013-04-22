@@ -16,7 +16,7 @@ $myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
 $myusername = mysql_real_escape_string($myusername);
 $mypassword = mysql_real_escape_string($mypassword);
-$sql="SELECT * FROM $tbl_name WHERE user='$myusername' and password='$mypassword'";
+$sql="SELECT * FROM $usr_tbl_name WHERE user='$myusername' and password='$mypassword'";
 $result=mysql_query($sql);
 
 // Count results
@@ -29,6 +29,8 @@ if($count==1){
 $_SESSION['user']=$myusername;
 $_SESSION['pass']=$mypassword;
 $_SESSION['error']="";
+$row=mysql_fetch_assoc($result);
+$_SESSION['ID']=$row['ID'];
 header("location: ..\search.php");
 }
 else {

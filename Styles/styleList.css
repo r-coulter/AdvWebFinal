@@ -437,3 +437,11 @@ body {
 .closed{
     height: 0px;
 }
+
+.loginForm{
+    width: 228px;
+    margin: 0 auto 0 auto;
+}
+.error{
+    color: red;
+}
