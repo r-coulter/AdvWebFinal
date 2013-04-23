@@ -7,7 +7,7 @@
     if($_SESSION['user']==""){
         header("location:login.php");
     }else{
-        $sql="SELECT * FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE Owner=".$_SESSION['ID']." order by Priority Desc";
+        $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE Owner=".$_SESSION['ID']." order by Priority Desc";
         $result=mysql_query($sql);
     }
 
@@ -34,19 +34,20 @@
             
                 <?php
                     while ($row = mysql_fetch_assoc($result)) {
+                        if($row['Status']>1)continue;
                         $Status = array("", "", "", "");
-
                         $Status[$row['Status']]="selected";
+
                         echo('
                             <div class="listings">
                                 <div class="listing" id="listing'.$row['ID'].'">
                                     <div class="listingHead" onclick="toggleView('.$row['ID'].')">
                                         <span id="listingTitle-'.$row['ID'].'" class="listingHeadTitle left">'.$row['Title'].' - '.$row['Priority'].'</span>
-                                        <select class="listingHeadSelect editSelect right" id="published-'.$row['ID'].'">
+                                        <select class="listingHeadSelect editSelect right" id="Status-'.$row['ID'].'">
                                             <option value="0" '.$Status[0].'>Open</option>
                                             <option value="1" '.$Status[1].'>Pending</option>
                                             <option value="2" '.$Status[2].'>Finished</option>
-                                            <option value="-1" '.$Status[3].'>Closed</option>
+                                            <option value="3" '.$Status[3].'>Closed</option>
                                         </select>
                                     </div>
                                     <div id="body'.$row['ID'].'" class="listingBody closed">
@@ -81,6 +82,26 @@
             $("#listingTitle-"+eleID).text($(".title").val()+" - "+$(".title").val());
         });
         $(".title").trigger("change");
+
+
+        $("select").change(function(event){
+            var element=event.currentTarget;
+            var nColumn = $(element).attr("id").split("-")[0];
+            var nValue = $(element).val();
+            var ID=$(element).attr("id").split("-")[1];
+
+
+            var thecall = $.ajax({
+                type: "POST",
+                url: "Ajax/update.php",
+                async: true,
+                data: {Column:nColumn,Value:nValue, ID:ID },
+                dataType: "text",
+                complete: function (data) {
+                    console.log(data.responseText);
+                }
+            });
+        });
     });
 
     function toggleView(listingNum){

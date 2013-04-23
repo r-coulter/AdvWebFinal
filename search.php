@@ -48,13 +48,14 @@
                     //Process all returned rows
                     $status = "";
                     while ($row = mysql_fetch_assoc($result)) {
+                        if($row['Status']==2||$row['Status']==3)continue;
                         if($row['Status']==0){
                             $status="Open";
                         }elseif($row['Status']==1){
                             $status="Pending";
                         }elseif($row['Status']==2){
                             $status="Finished";
-                        }elseif($row['Status']==-1){
+                        }elseif($row['Status']==3){
                             $status="Closed";
                         }
                         echo('
