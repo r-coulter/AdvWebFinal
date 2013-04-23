@@ -96,6 +96,18 @@
         $(".clmTitle").each(function(){
                 if($(this).text().toLowerCase().indexOf(query.toLowerCase())>-1)$(this).parent().removeClass("hidden").addClass("result");
         });
+        $(".clmPriority").each(function(){
+                if($(this).text().toLowerCase().indexOf(query.toLowerCase())>-1)$(this).parent().removeClass("hidden").addClass("result");
+        });
+        $(".clmCustomer").each(function(){
+                if($(this).text().toLowerCase().indexOf(query.toLowerCase())>-1)$(this).parent().removeClass("hidden").addClass("result");
+        });
+        $(".clmStatus").each(function(){
+                if($(this).text().toLowerCase().indexOf(query.toLowerCase())>-1)$(this).parent().removeClass("hidden").addClass("result");
+        });
+        $(".clmClaim").each(function(){
+                if($(this).text().toLowerCase().indexOf(query.toLowerCase())>-1)$(this).parent().removeClass("hidden").addClass("result");
+        });
     }
 
     function claimTicket(_id){
