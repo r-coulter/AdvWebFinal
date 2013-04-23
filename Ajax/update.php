@@ -1,6 +1,10 @@
 <?php require_once('../security/DB.php'); ?>
 <?php
-    //Ajax page used for Async DB updates
+    /*    
+Author: Ryan Coulter
+Web site name: AdvWebFinal
+Description: Ajax page used for Async DB updates
+*/
     if (!isset($_SESSION)) {
         session_start();
     }

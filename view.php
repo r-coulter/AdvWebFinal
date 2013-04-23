@@ -1,5 +1,11 @@
 ﻿<?php require_once('security/DB.php'); ?>
 <?php
+    
+    /*    
+Author: Ryan Coulter
+Web site name: AdvWebFinal
+Description: View all tickets for your user or a single ticket
+*/
     if (!isset($_SESSION)) {
         session_start();
     }

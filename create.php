@@ -1,5 +1,13 @@
 ﻿<?php require_once('security/DB.php'); ?>
 <?php
+    
+    /*    
+Author: Ryan Coulter
+Web site name: AdvWebFinal
+Description: Ticket creation form
+*/
+
+
     if (!isset($_SESSION)) {
         session_start();
     }

@@ -1,5 +1,12 @@
 <?php require_once('../security/DB.php'); ?>
 <?php
+    
+    /*    
+Author: Ryan Coulter
+Web site name: AdvWebFinal
+Description: Login Backend page
+*/
+
 //initialize the session
 if (!isset($_SESSION)) {
     session_start();

@@ -1,4 +1,10 @@
 <?php
+/*    
+Author: Ryan Coulter
+Web site name: AdvWebFinal
+Description: Login page
+*/
+
     if (!isset($_SESSION)) {
         session_start();
     }
@@ -7,6 +13,7 @@
         header("location:myContacts.php");
     }
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">

@@ -1,5 +1,13 @@
 <?php require_once('security/DB.php'); ?>
 <?php
+    
+    /*    
+Author: Ryan Coulter
+Web site name: AdvWebFinal
+Description: Adds a new ticket to the database
+*/
+
+
     if (!isset($_SESSION)) {//Creates a new user and then logs them in.
         session_start();
     }
