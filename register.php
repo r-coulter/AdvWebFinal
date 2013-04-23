@@ -18,11 +18,11 @@
     <body>
         <div class="navHeader">
             <div class="innerNavHeader">
-                <a class="navHeaderLink left current">Login</a><a href="register.php" class="contactButton right">Register</a>
+                <a class="navHeaderLink left current">Register</a>
             </div>
         </div>
         <div class="loginForm">
-            <form method="post" action="security/checkLogin.php">
+            <form method="post" action="security/createUser.php">
                 <table>
                     <p class="error"><?php echo($_SESSION['error']); ?></p><!--Output a login error if one exists-->
                     <tr><td>Username</td><td><input type="text" name="user"></td></tr>

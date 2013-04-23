@@ -24,7 +24,7 @@
     <body>
         <div class="navHeader">
             <div class="innerNavHeader">
-                <a class="navHeaderLink left current">All Tickets</a><a href="view.php" class="navHeaderLink left">My Tickets</a><a href="security/logout.php" class="contactButton right">Log Out</a>
+                <a class="navHeaderLink left current">All Tickets</a><a href="view.php" class="navHeaderLink left">My Tickets</a><a href="security/logout.php" class="contactButton right">Log Out</a><a href="create.php" class="contactButton right" onclick="">New Ticket</a>
             </div>
         </div>
 

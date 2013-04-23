@@ -7,7 +7,7 @@
     if($_SESSION['user']==""){
         header("location:login.php");
     }else{
-        $sql="SELECT * FROM Tickets WHERE order Owner=".$_SESSION['user']." by Priority Desc";
+        $sql="SELECT ID,user FROM admin";
         $result=mysql_query($sql);
     }
 
@@ -30,31 +30,38 @@
 
         <div class="profileBody">
             <div class="profileFormDiv left">
-                <table class="profileTable">
-                    <tr><td class="profileTableLabel">Title</td><td><input class="inputWidth editText" id="fName" type="text" value=""></td></tr>
-                    <tr><td class="profileTableLabel">Customer</td><td><input class="inputWidth  editText" id="lName" type="text" value=""></td></tr>
-                    <tr><td class="profileTableLabel">Owner</td><td>
-                        <div><select id="owner" class="inputWidth editSelect">
-                            <option selected></option>
-                            <option>Me</option>
-                        </select></div>
-                    </td></tr>
-                    <tr><td class="profileTableLabel">Priority</td><td>
-                    <div><select id="priority" class="inputWidth editSelect">
-                            <option>0</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select></div>
-                    </td></tr>
-                    <tr>
-                        <td class="profileTableLabel" style="position: relative;top: -100px;">Description</td>
-                        <td><textarea id="instructions" class="editText" maxlength="325"></textarea></td>
-                    </tr>
-
-                </table>
+                <form method="post" action="createTicket.php">
+                    <table class="profileTable">
+                        <tr><td class="profileTableLabel">Title</td><td><input class="inputWidth editText" name="Title" type="text" value=""></td></tr>
+                        <tr><td class="profileTableLabel">Customer</td><td><input class="inputWidth  editText" name="Customer" type="text" value=""></td></tr>
+                        <tr><td class="profileTableLabel">Owner</td><td>
+                            <div><select name="Owner" class="inputWidth editSelect">
+                                <option value="0" selected>Not Assigned</option>
+                                <?php 
+                                    while ($row = mysql_fetch_assoc($result)) {
+                                        echo("<option value='".$row['ID']."'>".$row['user']."</option>");
+                                    }
+                                ?>
+                            </select></div>
+                        </td></tr>
+                        <tr><td class="profileTableLabel">Priority</td><td>
+                        <div><select name="Priority" class="inputWidth editSelect">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select></div>
+                        </td></tr>
+                        <tr>
+                            <td class="profileTableLabel" style="position: relative;top: -100px;">Description</td>
+                            <td><textarea name="Description" class="editText" maxlength="325"></textarea></td>
+                        </tr>
+                        <tr><td></td><td><input type="submit" value="Create Ticket"></td></tr>
+                    </table>
+                    
+                </form>
             </div>
         </div>
 

@@ -7,7 +7,7 @@
     if($_SESSION['user']==""){
         header("location:login.php");
     }else{
-        $sql="SELECT * FROM Tickets WHERE Owner=".$_SESSION['ID']." ORDER by Priority Desc";
+        $sql="SELECT * FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE Owner=".$_SESSION['ID']." order by Priority Desc";
         $result=mysql_query($sql);
     }
 
@@ -27,7 +27,6 @@
                 <a href="search.php" class="navHeaderLink left">All Tickets</a><a class="navHeaderLink left current">My Tickets</a><a href="security/logout.php" class="contactButton right">Log Out</a>
             </div>
         </div>
-        <?php echo($_SESSION['ID']);?>
         <!--469px-->
         <div class="profileBody">
 
@@ -35,40 +34,28 @@
             
                 <?php
                     while ($row = mysql_fetch_assoc($result)) {
+                        $Status = array("", "", "", "");
+
+                        $Status[$row['Status']]="selected";
                         echo('
                             <div class="listings">
                                 <div class="listing" id="listing'.$row['ID'].'">
                                     <div class="listingHead" onclick="toggleView('.$row['ID'].')">
-                                        <span id="listingTitle-'.$row['ID'].'" class="listingHeadTitle left">'.$row['Priority'].'</span>
+                                        <span id="listingTitle-'.$row['ID'].'" class="listingHeadTitle left">'.$row['Title'].' - '.$row['Priority'].'</span>
                                         <select class="listingHeadSelect editSelect right" id="published-'.$row['ID'].'">
-                                            <option value="0">Open</option>
-                                            <option value="1">Pending</option>
-                                            <option value="2">Finished</option>
-                                            <option value="-1">Closed</option>
+                                            <option value="0" '.$Status[0].'>Open</option>
+                                            <option value="1" '.$Status[1].'>Pending</option>
+                                            <option value="2" '.$Status[2].'>Finished</option>
+                                            <option value="-1" '.$Status[3].'>Closed</option>
                                         </select>
                                     </div>
                                     <div id="body'.$row['ID'].'" class="listingBody closed">
                                         <div class="listingBodyLeft left">
                                             <table class="profileTable">
-                                                <tr><td class="profileTableLabel">Title</td><td><input class="inputWidth editText title" id="Title-'.$row['ID'].'" type="text" value="'.$row['Title'].'"></td></tr>
-                                                <tr><td class="profileTableLabel">Customer</td><td><input class="inputWidth  editText" id="Customer-'.$row['ID'].'" type="text" value="'.$row['Customer_Name'].'"></td></tr>
-                                               <tr><td class="profileTableLabel">Owner</td><td>
-                                               <div><select id="priority" class="inputWidth editSelect">
-                                                        <option>Me</option>
-                                                        <option>You</option>
-                                                        <option>Him</option>
-                                                    </select></div>
-                                                </td></tr>
-                                                <tr><td class="profileTableLabel">Priority</td><td>
-                                                <div><select id="priority" class="inputWidth editSelect">
-                                                        <option>0</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select></div>
-                                                </td></tr>
+                                                <tr><td class="profileTableLabel">Title</td><td><span>'.$row['Title'].'</span></td></tr>
+                                                <tr><td class="profileTableLabel">Customer</td><td><span>'.$row['Customer_Name'].'</span></td></tr>
+                                               <tr><td class="profileTableLabel">Owner</td><td><span>'.$row['user'].'</span></td></tr>
+                                                <tr><td class="profileTableLabel">Priority</td><td><span>'.$row['Priority'].'</span></td></tr>
                                                 <tr><td class="profileTableLabel" style="position: relative;top: -100px;">Description</td><td><textarea maxlength="325" class="inputWidth  editText" id="Description-'.$row['ID'].'">'.$row['Description'].'</textarea></td></tr>
                                             </table>
                                         </div>
