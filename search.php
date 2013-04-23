@@ -7,7 +7,12 @@
     if($_SESSION['user']==""){
         header("location:login.php");
     }else{
-        $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID order by Priority Desc";
+        if($_REQUEST['View']=="all"){
+            $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID order by Priority Desc, Status";
+        }else{
+            $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE T.Status<2 order by Priority Desc, Status";
+        }
+        
         $result=mysql_query($sql);
     }
 
@@ -24,7 +29,7 @@
     <body>
         <div class="navHeader">
             <div class="innerNavHeader">
-                <a class="navHeaderLink left current">All Tickets</a><a href="view.php" class="navHeaderLink left">My Tickets</a><a href="security/logout.php" class="contactButton right">Log Out</a><a href="create.php" class="contactButton right" onclick="">New Ticket</a>
+                <a class="navHeaderLink left current">All Tickets</a><a href="view.php" class="navHeaderLink left">My Tickets</a><a href="security/logout.php" class="contactButton right">Log Out</a><a href="create.php" class="contactButton right" onclick="">New Ticket</a><a href="search.php?View=all" class="contactButton right" onclick="">View All</a>
             </div>
         </div>
 
@@ -48,7 +53,6 @@
                     //Process all returned rows
                     $status = "";
                     while ($row = mysql_fetch_assoc($result)) {
-                        if($row['Status']==2||$row['Status']==3)continue;
                         if($row['Status']==0){
                             $status="Open";
                         }elseif($row['Status']==1){
