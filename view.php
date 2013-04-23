@@ -7,7 +7,11 @@
     if($_SESSION['user']==""){
         header("location:login.php");
     }else{
-        $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE Owner=".$_SESSION['ID']." order by Priority Desc";
+        if($_REQUEST['Ticket']!=""){
+            $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE T.ID=".$_REQUEST['Ticket']." order by Priority Desc";
+        }else{
+            $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE Owner=".$_SESSION['ID']." order by Priority Desc";
+        }
         $result=mysql_query($sql);
     }
 

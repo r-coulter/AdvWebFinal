@@ -7,7 +7,7 @@
     if($_SESSION['user']==""){
         header("location:login.php");
     }else{
-        $sql="SELECT * FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID order by Priority Desc";
+        $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID order by Priority Desc";
         $result=mysql_query($sql);
     }
 
@@ -59,7 +59,7 @@
                             $status="Closed";
                         }
                         echo('
-                        <tr class="row">
+                        <tr class="row" onclick="window.location.href=&quot;view.php?Ticket='.$row['ID'].'&quot;">
                             <td class="clmPriority clm">'.$row['Priority'].'</td>
                             <td class="clmTitle clm">'.$row['Title'].'</td>
                             <td class="clmCustomer clm">'.$row['Customer_Name'].'</td>
