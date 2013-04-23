@@ -1,6 +1,6 @@
 <?php require_once('security/DB.php'); ?>
 <?php
-    if (!isset($_SESSION)) {
+    if (!isset($_SESSION)) {//Creates a new user and then logs them in.
         session_start();
     }
     //If the session user variable is blank redirect to the login screen. Otherwise grab sorted contacts from the database.

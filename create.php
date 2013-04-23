@@ -37,7 +37,7 @@
                         <tr><td class="profileTableLabel">Owner</td><td>
                             <div><select name="Owner" class="inputWidth editSelect">
                                 <option value="0" selected>Not Assigned</option>
-                                <?php 
+                                <?php //Populate the owner box with a list of users
                                     while ($row = mysql_fetch_assoc($result)) {
                                         echo("<option value='".$row['ID']."'>".$row['user']."</option>");
                                     }
@@ -69,32 +69,3 @@
 </html>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-
-<script>
-    var mode=0;
-    $(document).ready(function () {   
-        
-   
-    });
-
-    /*Ad size
-    Single Listing Feature Ad
-    Quarter Page Ad (Max 3 listings)
-    Half Page Ad (Max 8 listings)
-    Full Page Ad (Max 16 listings)
-    Double Page Spread (Max 32 listings)
-    */
-
-    /*Payment options
-    Bill My Office
-    Cheque
-    Visa or Mastercard
-    */
-
-
-
-</script>
-
-<script>
-
-</script>

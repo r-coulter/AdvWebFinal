@@ -36,7 +36,7 @@
 
             <!--PHP Load-->
             
-                <?php
+                <?php//Adds a display for each ticket
                     while ($row = mysql_fetch_assoc($result)) {
                         if($row['Status']>1)continue;
                         $Status = array("", "", "", "");
@@ -79,15 +79,7 @@
 
 <script>
     var mode=0;
-    $(document).ready(function () {   
-        $(".title").change(function(evt){
-            return;
-            var eleID = evt.currentTarget.id.split("-")[1];
-            $("#listingTitle-"+eleID).text($(".title").val()+" - "+$(".title").val());
-        });
-        $(".title").trigger("change");
-
-
+    $(document).ready(function () {   //Sends an Ajax request to update the ticket Status
         $("select").change(function(event){
             var element=event.currentTarget;
             var nColumn = $(element).attr("id").split("-")[0];

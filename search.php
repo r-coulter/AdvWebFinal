@@ -7,7 +7,7 @@
     if($_SESSION['user']==""){
         header("location:login.php");
     }else{
-        if($_REQUEST['View']=="all"){
+        if($_REQUEST['View']=="all"){//Display All tickets or only Open/Pending tickets
             $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID order by Priority Desc, Status";
         }else{
             $sql="SELECT T.ID,T.Description,T.Priority,T.Narrative,Customer_Name,T.Title,T.Status,T.Owner,A.user FROM Tickets as T LEFT JOIN admin as A on T.Owner=A.ID WHERE T.Status<2 order by Priority Desc, Status";
@@ -81,8 +81,9 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
-<script>
+<script>//Event Listeners
     $(document).ready(function () {          
+        //The enter key can be used to search as well as clicking the button
         $("#searchInput").keyup(function(event){
             if(event.keyCode == 13){
                 search();
@@ -90,6 +91,7 @@
         });
     });
 
+    //Checks if the search text exists within and of the columns
     function search(){
         var query=$("#searchInput").val();
         if(query==""){
@@ -111,19 +113,6 @@
         });
         $(".clmClaim").each(function(){
                 if($(this).text().toLowerCase().indexOf(query.toLowerCase())>-1)$(this).parent().removeClass("hidden").addClass("result");
-        });
-    }
-
-    function claimTicket(_id){
-        var thecall = $.ajax({
-            type: "POST",
-            url: "/Ajax/claimTicket.php",
-            async: true,
-            data: {theID:_id},
-            dataType: "text",
-            complete: function (data) {
-                document.location.reload(true);
-            }
         });
     }
 </script>
