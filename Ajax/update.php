@@ -31,6 +31,7 @@ Description: Ajax page used for Async DB updates
                 $sql0="UPDATE Tickets SET Owner=".$_SESSION['ID']." WHERE ID=".$ID;
             }elseif($Value==2){
                 $Value2='Finished';
+                $sql0="UPDATE Tickets SET Owner=".$_SESSION['ID']." WHERE ID=".$ID;
             }elseif($Value==3){
                 $Value2='Closed';
             }
